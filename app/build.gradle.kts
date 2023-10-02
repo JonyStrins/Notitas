@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.notitasapp"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.notitasapp"
@@ -48,6 +48,11 @@ android {
 
 dependencies {
 
+    //libreria Navigation
+    val nav_version = "2.5.3"
+
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+
     // Retrofit
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -62,6 +67,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.ui:ui-android:1.5.2")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

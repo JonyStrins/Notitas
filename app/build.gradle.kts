@@ -48,6 +48,7 @@ android {
 
 dependencies {
 
+    implementation("com.google.firebase:protolite-well-known-types:18.0.0")
     //libreria Navigation
     val nav_version = "2.5.3"
 

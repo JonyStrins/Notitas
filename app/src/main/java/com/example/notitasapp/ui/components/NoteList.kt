@@ -22,7 +22,7 @@ fun NoteList(
     onSelectedNote: (note: NotasTareas) -> Unit
 ) {
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 175.dp),
+        columns = GridCells.Adaptive(minSize = 250.dp),
         modifier = modifier.fillMaxSize()
     ) {
 
@@ -30,7 +30,7 @@ fun NoteList(
             NoteCard(
                 modifier = Modifier
                     .padding(10.dp)
-                    .height(100.dp)
+                    .height(125.dp)
                     .width(150.dp),
                 note = note,
                 onSelectedNote = onSelectedNote

@@ -4,6 +4,8 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material3.ButtonDefaults
@@ -31,16 +33,24 @@ fun NoteCard(
     onSelectedNote: (note: NotasTareas) -> Unit
     ){
     Card(
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 7.dp
+        ),
+        colors = CardDefaults.cardColors(
+            containerColor = Color(0xE4A8F5C7),
+            contentColor = Color(0xFF000000)
+        ),
         modifier = modifier.clickable{onSelectedNote(note)}
             .border(
-                border = BorderStroke(3.dp, Color(0xFF38A4FC)),
-                shape = CutCornerShape(5.dp)
+                border = BorderStroke(2.dp, Color(0xE4A8F5C7)),
+                shape = CutCornerShape(16.dp)
             )
     ) {
         Column(
             modifier = Modifier.padding(10.dp)
         ) {
             Text(text = note.titulo, fontWeight = FontWeight.Bold, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Spacer(modifier = Modifier.height(6.dp))
             Text(text = note.contenido, maxLines = 3, overflow = TextOverflow.Ellipsis)
         }
     }

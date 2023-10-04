@@ -14,11 +14,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.notitasapp.model.NotasTareas
 import com.example.notitasapp.ui.MainDestination
 import com.example.notitasapp.ui.components.NoteList
 import com.example.notitasapp.ui.theme.NotitasAppTheme
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -27,9 +29,12 @@ fun HomeScreen(
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        contentColor = MaterialTheme.colorScheme.background,
         floatingActionButton = {
-            ExtendedFloatingActionButton(text = {Text("Agregar")}, onClick = { onNavigate(MainDestination.AddScreen)}, icon = {
+            ExtendedFloatingActionButton(
+                text = {Text("Agregar")},
+                onClick = { onNavigate(MainDestination.AddScreen)},
+                containerColor = Color(0xFFA1D0F0),
+                icon = {
                 Icon(
                     Icons.Filled.Add,
                     contentDescription = "Add"

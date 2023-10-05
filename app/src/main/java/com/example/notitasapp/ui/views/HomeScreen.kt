@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.notitasapp.model.NotasTareas
 import com.example.notitasapp.ui.MainDestination
+import com.example.notitasapp.ui.components.NotasTareasUiState
 import com.example.notitasapp.ui.components.NoteList
 import com.example.notitasapp.ui.theme.NotitasAppTheme
 
@@ -25,7 +26,7 @@ import com.example.notitasapp.ui.theme.NotitasAppTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    onNavigate: (MainDestination)->Unit
+    onNavigate: (MainDestination)->Unit,
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),

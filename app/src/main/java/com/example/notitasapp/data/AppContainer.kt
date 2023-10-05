@@ -10,7 +10,7 @@ interface AppContainer{
     val notasTareasRepository: NotasTareasRepository
 }
 class DefaultAppContainer : AppContainer{
-    private val baseUrl = "https://android-kotlin-fun-mars-server.appspot.com/"
+    private val baseUrl = "https://ae18-187-251-133-194.ngrok-free.app"
 
     private val retrofit: Retrofit = Retrofit.Builder()
         .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))

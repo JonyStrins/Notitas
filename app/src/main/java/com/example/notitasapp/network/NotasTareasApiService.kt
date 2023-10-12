@@ -20,6 +20,6 @@ interface NotasTareasApiService {
      * Aqui se pondra solo como ejemplo notaTarea hasta que se tenga
      * bien definida la funcion HTTP
      */
-    @GET("notatarea")
+    @GET("api/NotasTareas")
     suspend fun getNotasTareas(): List<NotasTareas>
 }

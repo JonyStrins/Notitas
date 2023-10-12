@@ -3,6 +3,10 @@ package com.example.notitasapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -11,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.notitasapp.ui.MainDestination
+import com.example.notitasapp.ui.NotasTareasApp
 import com.example.notitasapp.ui.theme.NotitasAppTheme
 import com.example.notitasapp.ui.views.AddScreen
 import com.example.notitasapp.ui.views.HomeScreen
@@ -20,16 +25,22 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NotitasAppTheme {
-                val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = MainDestination.HomeScreen.route) {
-                    composable(MainDestination.HomeScreen.route) {
-                        HomeScreen(onNavigate = { screen ->
-                            navigate(navHostController = navController, destination = screen)
-                        })
-                    }
-                    composable(MainDestination.AddScreen.route) {
-                        AddScreen()
-                    }
+//                val navController = rememberNavController()
+//                NavHost(navController = navController, startDestination = MainDestination.HomeScreen.route) {
+//                    composable(MainDestination.HomeScreen.route) {
+//                        HomeScreen(onNavigate = { screen ->
+//                            navigate(navHostController = navController, destination = screen)
+//                        })
+//                    }
+//                    composable(MainDestination.AddScreen.route) {
+//                        AddScreen()
+//                    }
+//                }
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    NotasTareasApp()
                 }
             }
         }

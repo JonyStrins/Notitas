@@ -1,6 +1,7 @@
 package com.example.notitasapp.ui.components
 
 import android.text.Spannable.Factory
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -39,6 +40,12 @@ class NotasTareasViewModel(private val notasTareasRepository: NotasTareasReposit
             }catch (e: IOException){
                 NotasTareasUiState.Error
             }
+//            try {
+//                val listResult = notasTareasRepository.getNotasTareas()
+////                listResult.forEach{Log.}
+//            }catch (e: IOException){
+//
+//            }
         }
     }
 

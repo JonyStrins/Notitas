@@ -1,70 +1,134 @@
 package com.example.notitasapp.ui.views
 
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.notitasapp.R
 import com.example.notitasapp.model.NotasTareas
-import com.example.notitasapp.ui.MainDestination
 import com.example.notitasapp.ui.components.NotasTareasUiState
-import com.example.notitasapp.ui.components.NoteList
-import com.example.notitasapp.ui.theme.NotitasAppTheme
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    onNavigate: (MainDestination)->Unit,
+    notasTareasUiState: NotasTareasUiState,
+    retryAction: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        floatingActionButton = {
-            ExtendedFloatingActionButton(
-                text = {Text("Agregar")},
-                onClick = { onNavigate(MainDestination.AddScreen)},
-                containerColor = Color(0xFFA1D0F0),
-                icon = {
-                Icon(
-                    Icons.Filled.Add,
-                    contentDescription = "Add"
-                )
-            } )
-        }
+    when (notasTareasUiState){
+        is NotasTareasUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
+
+        is NotasTareasUiState.Succes -> NotasGridScreen(notas = notasTareasUiState.Notas, modifier)
+
+        is NotasTareasUiState.Error -> ErrorScreen(retryAction, modifier = modifier.fillMaxSize())
+        else -> {}
+    }
+}
+
+@Composable
+fun ErrorScreen(retryAction: () -> Unit, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        //solo se crea para mostrar un ejemplo de como quedaria
-        val notes = listOf(
-            NotasTareas(id = 1, titulo = "Primera nota", contenido = "esta es la primera nota de la app\nsiguiente linea ", estatus = 1, tipo = 1, ),
-            NotasTareas(id = 1, titulo = "Segunda nota", contenido = "Una segunda nota para la aplicacion\nde la materia de movil ", estatus = 1, tipo = 1,),
-            NotasTareas(id = 1, titulo = "Tercera nota", contenido = "I was born with the wrong sign\nIn the wrong house", estatus = 1, tipo = 1,),
-            NotasTareas(id = 1, titulo = "Cuarta nota", contenido = "With the wrong ascendancy\nI took the wrong road", estatus = 1, tipo = 1,),
-            NotasTareas(id = 1, titulo = "Quinta nota", contenido = "That led to the wrong tendencies\nI was in the wrong place at the wrong time", estatus = 1, tipo = 1,),
+        Image(
+            painter = painterResource(id = R.drawable.ic_connection_error), contentDescription = ""
         )
-        //en esta parte es donde se manda a llamar el componente de la lista de las notas
-        NoteList(modifier = Modifier.padding(it), notes = notes , onSelectedNote = {})
+        Text(text = "Fallo al cargar", modifier = Modifier.padding(16.dp))
+        Button(onClick = retryAction) {
+            Text(text = "Intentar de nuevo")
+        }
+    }
+}
 
+@Composable
+fun NotasGridScreen(notas: List<NotasTareas>, modifier: Modifier) {
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(150.dp),
+        modifier = modifier.fillMaxWidth(),
+        contentPadding = PaddingValues(4.dp)
+    ){
+        items(items = notas ){
+            notas ->
+            NoteCard1(note = notas,
+                modifier = modifier
+                    .padding(4.dp)
+                    .fillMaxWidth()
+                    .aspectRatio(1.5f))
+        }
     }
 }
 @Composable
-fun FakeHomeScreen(){
-    NotitasAppTheme{
-        HomeScreen(onNavigate = {})
+fun NoteCard1(
+    note: NotasTareas,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        shape = RoundedCornerShape(20.dp),
+        //border = BorderStroke(1.dp, Color(0x8F00F061)),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 15.dp
+        ),
+        colors = CardDefaults.cardColors(
+            containerColor = Color(0xCEBDF5D4),
+            contentColor = Color(0xFF000000)
+        ),
+//        modifier = modifier
+//            .clickable { onSelectedNote(note) }
+    ) {
+        Column(
+            modifier = Modifier.padding(10.dp)
+        ) {
+            Text(text = note.titulo, fontWeight = FontWeight.Bold, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Spacer(modifier = Modifier.height(6.dp))
+            //Text(text = note.contenido, maxLines = 3, overflow = TextOverflow.Ellipsis)
+            Spacer(modifier = Modifier.height(6.dp))
+            Row (
+                modifier = Modifier.padding(5.dp)
+            ){
+                Text(text = note.fecha, fontSize = 10.sp)
+                Spacer(modifier = Modifier.width(195.dp))
+                Text(text = note.fechaModi, fontSize = 10.sp)
+            }
+        }
     }
 }
-@Preview
-@Composable
-fun HomeScreenView(){
-    FakeHomeScreen()
-}
 
+@Composable
+fun LoadingScreen(modifier: Modifier = Modifier) {
+    Image(
+        modifier = modifier.size(200.dp),
+        painter = painterResource(R.drawable.loading_img),
+        contentDescription = "Loading"
+    )
+}

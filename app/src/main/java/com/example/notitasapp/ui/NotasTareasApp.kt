@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.notitasapp.model.NotasTareas
 import com.example.notitasapp.ui.components.NotasTareasViewModel
 import com.example.notitasapp.ui.views.HomeScreen
 

@@ -1,7 +1,6 @@
-package com.example.notitasapp.model
+package com.example.notitasapp.models
 
 import kotlinx.serialization.Serializable
-import java.sql.Date
 
 @Serializable
 data class NotasTareas(

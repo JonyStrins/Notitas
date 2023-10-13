@@ -1,6 +1,6 @@
 package com.example.notitasapp.data
 
-import com.example.notitasapp.model.NotasTareas
+import com.example.notitasapp.models.NotasTareas
 import com.example.notitasapp.network.NotasTareasApiService
 
 interface NotasTareasRepository {

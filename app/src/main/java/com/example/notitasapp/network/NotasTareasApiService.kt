@@ -1,6 +1,6 @@
 package com.example.notitasapp.network
 
-import com.example.notitasapp.model.NotasTareas
+import com.example.notitasapp.models.NotasTareas
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
